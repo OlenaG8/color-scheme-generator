@@ -1,0 +1,48 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    overflow-x: hidden;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    /* font-family: 'Source Sans Pro', sans-serif; */
+    background-color: #fff;
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.colors {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+}
+
+
+.title {
+    background-color: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255,255,255,0));
+    backdrop-filter: blur(22px) grayscale(50%);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 30px;
+    width: 100vw;
+    height: 100px;
+    position: absolute;
+    text-align: center;
+    /* grid-column: 1 / -1; */
+}
+
+.one {
+    background-color: honeydew;
+}
+
+.two { background-color: brown;}
+.three { background-color: blueviolet;}
+.four { background-color: azure;}
+.five { background-color: bisque;}
+
