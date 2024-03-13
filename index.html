@@ -3,22 +3,50 @@
     <head>
         <title>Color Scheme Generator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+            
         <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
 
-        <div class="title">Color Scheme Generator</div>
+        <header>
+            <div class="nav-con">
+                <h1>Color Scheme Generator</h1>
+                
+                <label for="input-color">Base color:</label>
+                <input type="color"
+                    class="input-color"
+                    id="input-color"
+                    name="input-color"
+                />
+                <select name="color-scheme" class="color-scheme neumorphism-style" id="color-scheme">
+                    <!-- Color scheme options go here -->
+                </select>
+    
+                <button class="generate-btn neumorphism-style">Generate</button>
+    
+            </div>
+        </header>
 
-        <div class="colors container">
-            <div class="color-box one" id="color1"></div>
-            <div class="color-box two" id="color2"></div>
-            <div class="color-box three" id="color3"></div>
-            <div class="color-box four" id="color4"></div>
-            <div class="color-box five" id="color5"></div>
-        </div>
+        <section>
+            <div class="colors container">
+                <div class="color-box one" id="color1"></div>
+                <div class="color-box two" id="color2"></div>
+                <div class="color-box three" id="color3"></div>
+                <div class="color-box four" id="color4"></div>
+                <div class="color-box five" id="color5"></div>
+            </div>
+        </section>
 
+        <footer>
+            <div class="color-values-con">
+                <button class="color-value neumorphism-style"></button>
+            </div>
+        </footer>
 
         <script src="index.js" type="module"></script>
     </body>
