@@ -79,6 +79,7 @@ footer {
 
 .neumorphism-style {
     text-align: center;
+    font-family: inherit;
     letter-spacing: 0.11rem;
     padding: 0.7em 0;
     color: #444;
@@ -125,6 +126,8 @@ footer {
         grid-column: 1/-1;
         justify-self: end;
     }
+
+    .neumorphism-style { font-size: 1rem;}
 
     label,
     .input-color,
