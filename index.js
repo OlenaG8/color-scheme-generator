@@ -1,5 +1,11 @@
 const baseColorInput = document.getElementById("input-color")
-let baseColor = baseColorInput.value
+let baseColor = baseColorInput.value.replace(/^#/, '')
+
+const numberOfColorsInput = document.getElementById("color-count")
+let numberOfColors = numberOfColorsInput.value
+
+const colorSchemeInput = document.getElementById("color-scheme")
+let colorScheme = '' 
 
 const generateBtn = document.getElementById("generate-btn")
 
@@ -10,36 +16,37 @@ const colorSchemesOptArr = [
 ]
 
 function renderColorSchemes() {
+    colorSchemeInput.innerHTML = ''
 
-    colorSchemesOptArr.map(
-        function(color){
-        document.getElementById("color-scheme").innerHTML += `
-        <option class="scheme-opt" value="${color}">${color}</option>`
-    }).join('')
+    colorSchemesOptArr.forEach(function(scheme) {
+        const option = document.createElement('option')
+        option.value = scheme
+        option.textContent = scheme
+        colorSchemeInput.appendChild(option)
+    })
 
+    if (colorSchemesOptArr.length > 0) {
+        colorSchemeInput.options[0].setAttribute('selected', 'selected')
+        colorScheme = colorSchemeInput.options[0].textContent
+    }
 }
 
+renderColorSchemes()
+
 baseColorInput.addEventListener("change", e => baseColor = e.target.value)
-
-generateBtn.addEventListener("click", function(){
-    console.log(baseColor)
-    const colorScheme = document.getElementById("color-scheme").value 
-
-    // Hex value is supossed to be put in the url without # - to fix
-    
-    if (baseColor && colorScheme) {
-        fetch(`https://www.thecolorapi.com//scheme?hex=${baseColor}&mode=triad&count=6`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.colors)
-            })
-    } else if (baseColor) {
-        fetch(`https://www.thecolorapi.com/?hex=${baseColor}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.colors)
-            })
-    } else { alert("Nope") }
+numberOfColorsInput.addEventListener("change", e => numberOfColors = e.target.value)
+colorSchemeInput.addEventListener("change", function() {
+    colorScheme = colorSchemeInput.options[colorSchemeInput.selectedIndex].textContent.toLowerCase()
 })
 
-renderColorSchemes()
+generateBtn.addEventListener("click", function() {
+    console.log(baseColor)
+    console.log(numberOfColors)
+    console.log(colorScheme)
+
+    fetch(`https://www.thecolorapi.com/scheme?hex=${baseColor}&mode=${colorScheme.toLocaleLowerCase()}&count=${numberOfColors}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+})
