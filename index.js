@@ -9,6 +9,9 @@ let colorScheme = ''
 
 const generateBtn = document.getElementById("generate-btn")
 
+const colorPalette = document.getElementById("color-palette")
+const colorPaletteValues = document.getElementById("color-palette-values")
+
 const colorSchemesOptArr = [ 
     "Monochrome", "Monochrome-dark", "Monochrome-light", 
     "Analogic", "Complement", "Analogic-complement", 
@@ -33,7 +36,7 @@ function renderColorSchemes() {
 
 renderColorSchemes()
 
-baseColorInput.addEventListener("change", e => baseColor = e.target.value)
+baseColorInput.addEventListener("change", e => baseColor = e.target.value.replace(/^#/, ''))
 numberOfColorsInput.addEventListener("change", e => numberOfColors = e.target.value)
 colorSchemeInput.addEventListener("change", function() {
     colorScheme = colorSchemeInput.options[colorSchemeInput.selectedIndex].textContent.toLowerCase()
@@ -44,9 +47,53 @@ generateBtn.addEventListener("click", function() {
     console.log(numberOfColors)
     console.log(colorScheme)
 
-    fetch(`https://www.thecolorapi.com/scheme?hex=${baseColor}&mode=${colorScheme.toLocaleLowerCase()}&count=${numberOfColors}`)
+    if (baseColor && colorScheme && numberOfColors) {
+        fetch(`https://www.thecolorapi.com/scheme?hex=${baseColor}&mode=${colorScheme.toLowerCase()}&count=${numberOfColors}&format=json`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            renderColorPalette(data.colors)
         })
+    } else if (baseColor && colorScheme){
+
+        fetch(`https://www.thecolorapi.com/scheme?hex=${baseColor}&mode=${colorScheme.toLowerCase()}&format=json`)
+        .then(res => res.json())
+        .then(data => {
+            renderColorPalette(data.colors)
+        })
+    } else if (baseColor) {
+
+        fetch(`https://www.thecolorapi.com/scheme?hex=${baseColor}&format=json`)
+        .then(res => res.json())
+        .then(data => {
+            renderColorPalette(data.colors)
+        })
+    } else {
+        alert(`Something went wrong! Please try again later`)
+    }
+
 })
+
+function renderColorPalette(palette) {
+    colorPalette.innerHTML = ''
+    colorPaletteValues.innerHTML = ''
+    
+    for (let color of palette ) {
+
+        console.log(color)
+        const newColor = document.createElement('div')
+        newColor.style.background = color.hex.value
+        newColor.classList.add("color-box")
+
+        colorPalette.style.gridTemplateColumns = `repeat(${palette.length}, 1fr)`
+        colorPalette.appendChild(newColor)
+
+        const newColorValue = document.createElement('button')
+        newColorValue.innerHTML = color.hex.value + " " + color.name.value
+        newColorValue.classList.add("color-value")
+        newColorValue.classList.add("neumorphism-style")
+
+        colorPaletteValues.style.gridTemplateColumns = `repeat(${palette.length}, 1fr)`
+        colorPaletteValues.appendChild(newColorValue)
+    }
+    
+}
