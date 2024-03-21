@@ -26,6 +26,12 @@ h1 {
     text-wrap: wrap;
 }
 
+.tooltip {
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.11rem;
+}
+
 /*--- layout ---*/
 
 .nav-con,
@@ -58,27 +64,27 @@ footer {
 }
 
 .input-color { 
-    width: 100%;
+    width: 85vw;
     border: none;
     border-radius: 50px;
     background-color: transparent;
 }
 
 footer {
-    height: 13vh;
+    height: 15vh;
     bottom: 0;
 }
 
 .color-values-con { 
-    bottom: 0;
     width: 100vw;
-    height: 13vh;
+    height: 15vh;
 }
 
 .color-value {
+    bottom: 0;
     width: 90%;
-    min-height: 80px;
-    align-self: center;
+    height: 70px;
+    margin: 13px 0;
     justify-self: center;
 }
 
@@ -116,19 +122,33 @@ footer {
     inset 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+/* --- tooltip --- */
+
+.tooltip {
+    display: block;
+    position: absolute;
+    background: #efefef;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+    border: 1px solid #fff;
+}
+
 @media (min-width: 610px) {
-    .nav-con {
-        grid-template-columns: repeat(5, auto);
-        grid-template-rows: repeat(2, 1fr);
-    }
 
     h1 {
         font-size: 1.5rem;
         grid-column: 1/-1;
         justify-self: end;
     }
+    
+    .tooltip {
+        padding: 0.5em 1em;
+        font-size: 1em;
+    }
 
     .neumorphism-style { font-size: 1rem;}
+
+    .nav-con { grid-template-columns: repeat(5, auto);}
 
     label,
     .input-color,
@@ -139,14 +159,12 @@ footer {
         align-self: center;
     }
 
-    .input-color {
-        width: 50px;
-    }
+    .input-color,
+    .color-count { width: 50px;}
 
     .color-scheme,
     .generate-btn {
         height: 5vh;
         width: 25vw;
     }
-
 }
