@@ -163,5 +163,8 @@ footer {
     .color-count { width: 50px;}
 
     .color-scheme,
-    .generate-btn { width: 25vw; }
+    .generate-btn { 
+        height: fit-content;
+        width: 25vw; 
+    }
 }
